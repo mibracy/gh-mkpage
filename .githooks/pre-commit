@@ -1,0 +1,20 @@
+#!/bin/sh
+# Verify: every new skill in .agents/skills/ gets a demo file in docs/skills/
+
+staged=$(git diff --cached --name-only --diff-filter=A .agents/skills/)
+[ -z "$staged" ] && exit 0
+
+error=""
+for f in $staged; do
+  dir=$(echo "$f" | cut -d/ -f3)
+  [ -z "$dir" ] && continue
+  demo="docs/skills/${dir}-demo.md"
+  if [ ! -f "$demo" ] && ! git ls-files --cached -- "$demo" | grep -q .; then
+    echo "ERROR: missing demo file for skill '$dir'"
+    echo "  Create: $demo"
+    error=1
+  fi
+done
+
+[ -n "$error" ] && exit 1
+exit 0

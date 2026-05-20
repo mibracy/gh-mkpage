@@ -1,0 +1,83 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, closed]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build site with mkdocs
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/docs \
+            squidfunk/mkdocs-material build
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site
+
+  deploy-root:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+
+      - name: Deploy to gh-pages root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
+
+  deploy-preview:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+
+      - name: Deploy preview to gh-pages/preview/pr-${{ github.event.number }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
+          destination_dir: preview/pr-${{ github.event.number }}
+          keep_files: true
+
+  cleanup-preview:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Remove preview/pr-${{ github.event.number }}
+        run: |
+          cd gh-pages
+          rm -rf preview/pr-${{ github.event.number }}
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git diff --cached --quiet || git commit -m "cleanup preview pr-${{ github.event.number }}"
+          git push

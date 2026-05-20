@@ -1,0 +1,25 @@
+site_name: gh-mkpage
+site_url: https://mibracy.github.io/gh-mkpage/
+repo_url: https://github.com/mibracy/gh-mkpage
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - search.highlight
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+
+docs_dir: docs
+site_dir: site
