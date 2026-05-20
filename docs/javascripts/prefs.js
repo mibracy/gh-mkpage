@@ -196,8 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
   P.addButton();
 });
 document.addEventListener("DOMContentSwitch", function () {
-  requestAnimationFrame(function () {
-    P.restore();
-    P.addButton();
-  });
+  P.restore();
+  P.addButton();
 });
