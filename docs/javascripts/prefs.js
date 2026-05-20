@@ -35,14 +35,12 @@ P.apply = function (o) {
   if (o.primary) document.body.setAttribute("data-md-color-primary", o.primary);
   if (o.accent) document.body.setAttribute("data-md-color-accent", o.accent);
   if (o.scheme) document.body.setAttribute("data-md-color-scheme", o.scheme);
+  try { localStorage.removeItem("__palette"); } catch (e) {}
 };
 
 P.restore = function () {
   var prefs = P.load();
-  if (!prefs.primary && !prefs.accent && !prefs.scheme) {
-    P.apply({ primary: "brown", accent: "amber", scheme: "slate" });
-    return;
-  }
+  if (!prefs.primary && !prefs.accent && !prefs.scheme) return;
   if (document.body.getAttribute("data-md-color-primary") === prefs.primary &&
       document.body.getAttribute("data-md-color-accent") === prefs.accent &&
       document.body.getAttribute("data-md-color-scheme") === prefs.scheme) return;
@@ -178,6 +176,10 @@ P.addButton = function () {
 
   var header = document.querySelector(".md-header__inner");
   if (!header) return;
+
+  // Remove palette form entirely so Material's JS can't fight our attrs
+  var pf = header.querySelector('.md-header__option[data-md-component="palette"]');
+  if (pf) pf.remove();
 
   var wrapper = document.createElement("div");
   wrapper.id = "style-picker-btn";
