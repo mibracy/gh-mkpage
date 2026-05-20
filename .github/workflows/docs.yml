@@ -48,6 +48,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: site
           publish_branch: gh-pages
+          keep_files: true
 
       - name: Mark pages deployment successful
         if: success()
