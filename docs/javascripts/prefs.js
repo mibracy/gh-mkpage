@@ -33,11 +33,8 @@ P.clear = function () {
 
 P.apply = function (o) {
   if (o.primary) document.body.setAttribute("data-md-color-primary", o.primary);
-  else document.body.removeAttribute("data-md-color-primary");
   if (o.accent) document.body.setAttribute("data-md-color-accent", o.accent);
-  else document.body.removeAttribute("data-md-color-accent");
   if (o.scheme) document.body.setAttribute("data-md-color-scheme", o.scheme);
-  else document.body.removeAttribute("data-md-color-scheme");
 };
 
 P.restore = function () {
@@ -198,9 +195,4 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentSwitch", function () {
   P.restore();
   P.addButton();
-  var el = document.querySelector(".md-content");
-  if (el) {
-    el.style.animation = "none";
-    requestAnimationFrame(function () { el.style.animation = ""; });
-  }
 });
