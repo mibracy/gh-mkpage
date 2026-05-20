@@ -1,4 +1,4 @@
-# Update 3 — README + create-readme skill
+# v0.3.0 — README + create-readme skill
 
 **Date:** 2026-05-19
 

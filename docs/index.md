@@ -12,7 +12,7 @@ Welcome to **gh-mkpage** — a project for generating and deploying markdown doc
 ## Explore
 
 - **Skills** — 15 agent skills with demo guides
-- **Updates** — project progress logs
+- [**Updates**](updates/index.md) — project progress logs with semver
 
 ---
 

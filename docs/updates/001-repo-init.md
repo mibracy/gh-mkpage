@@ -1,4 +1,4 @@
-# Update 1 — Repo init + skill setup
+# v0.1.0 — Repo init + skill setup
 
 **Date:** 2026-05-19
 

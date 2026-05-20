@@ -1,4 +1,4 @@
-# Update 2 — Docs site + CI/CD pipeline
+# v0.2.0 — Docs site + CI/CD pipeline
 
 **Date:** 2026-05-19
 
