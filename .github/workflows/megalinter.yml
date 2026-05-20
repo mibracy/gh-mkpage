@@ -19,6 +19,6 @@ jobs:
         uses: oxsecurity/megalinter@v5
         with:
           flavor: cupcake
-          report-mode: fail-fast
+          report-mode: only-report
           comment-on-failure: true
           repo-token: ${{ secrets.GITHUB_TOKEN }}
