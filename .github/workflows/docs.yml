@@ -49,6 +49,16 @@ jobs:
           publish_dir: site
           publish_branch: gh-pages
 
+      - name: Mark pages deployment successful
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/${{ github.repository }}/statuses/${{ github.sha }} \
+            -f state=success \
+            -f description="Pages deploy successful" \
+            -f context="Pages deploy"
+
       - name: Verify root deployment
         uses: actions/checkout@v6
         with:
@@ -80,6 +90,16 @@ jobs:
           publish_branch: gh-pages
           destination_dir: preview/pr-${{ github.event.number }}
           keep_files: true
+
+      - name: Mark preview deployment successful
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }} \
+            -f state=success \
+            -f description="Preview deploy successful" \
+            -f context="Preview deploy"
 
       - name: Post preview URL
         env:
