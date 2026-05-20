@@ -49,25 +49,19 @@ function enableZoom(svg) {
   });
 }
 
-function scan() {
+function scanMermaid() {
   document.querySelectorAll(".mermaid svg").forEach(enableZoom);
 }
 
-function deferScan() {
-  setTimeout(scan, 300);
-  setTimeout(scan, 800);
+function ready() {
+  scanMermaid();
+  setTimeout(function () { scanMermaid(); }, 300);
+  setTimeout(function () { scanMermaid(); }, 800);
+  document.addEventListener("DOMContentSwitch", function () {
+    setTimeout(function () { scanMermaid(); }, 300);
+    setTimeout(function () { scanMermaid(); }, 800);
+  });
 }
-
-var ready = function () {
-  var target = document.body || document.documentElement;
-  if (target) {
-    var obs = new MutationObserver(deferScan);
-    obs.observe(target, { childList: true, subtree: true });
-  }
-  scan();
-  deferScan();
-  document.addEventListener("DOMContentSwitch", deferScan);
-};
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", ready);

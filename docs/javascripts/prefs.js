@@ -39,7 +39,10 @@ P.apply = function (o) {
 
 P.restore = function () {
   var prefs = P.load();
-  if (!prefs.primary && !prefs.accent && !prefs.scheme) return;
+  if (!prefs.primary && !prefs.accent && !prefs.scheme) {
+    P.apply({ primary: "brown", accent: "amber", scheme: "slate" });
+    return;
+  }
   if (document.body.getAttribute("data-md-color-primary") === prefs.primary &&
       document.body.getAttribute("data-md-color-accent") === prefs.accent &&
       document.body.getAttribute("data-md-color-scheme") === prefs.scheme) return;
