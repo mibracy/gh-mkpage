@@ -116,4 +116,8 @@
   border-color: var(--md-primary-fg-color);
 }
 
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #faf0dc;
+}
+
 
