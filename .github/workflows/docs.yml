@@ -22,7 +22,7 @@ jobs:
             squidfunk/mkdocs-material build
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site
           path: site
