@@ -88,10 +88,6 @@
   opacity: 0.7;
 }
 
-.md-header__option[data-md-component="palette"] {
-  display: none;
-}
-
 .md-picker-scheme {
   display: flex;
   gap: 8px;
