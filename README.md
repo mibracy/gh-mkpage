@@ -1,6 +1,10 @@
 # gh-mkpage
 
-Generate and deploy markdown documentation pages from GitHub using automated CI/CD.
+[![CI](https://github.com/mibracy/gh-mkpage/actions/workflows/docs.yml/badge.svg)](https://github.com/mibracy/gh-mkpage/actions/workflows/docs.yml)
+[![GitHub Pages](https://img.shields.io/github/deployments/mibracy/gh-mkpage/github-pages?label=pages&logo=github)](https://mibracy.github.io/gh-mkpage/)
+[![Dependabot alerts](https://img.shields.io/github/dependabot/alerts/mibracy/gh-mkpage?label=vulnerabilities)](https://github.com/mibracy/gh-mkpage/security/dependabot)
+
+Generate and deploy markdown documentation pages from GitHub using automated CI/CD. → **[Documentation](https://mibracy.github.io/gh-mkpage/)**
 
 ## Features
 
