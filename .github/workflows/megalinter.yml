@@ -1,0 +1,20 @@
+name: MegaLinter Cupcake
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  mega-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run MegaLinter with cupcake flavor
+        uses: oxsecurity/megalinter-action@v1
+        with:
+          flavor: cupcake
+          report-mode: fail-fast
+          comment-on-failure: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

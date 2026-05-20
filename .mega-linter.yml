@@ -1,0 +1,42 @@
+# MegaLinter configuration for gh-mkpage
+mega-linter:
+  # Enable all standard recipes
+  ENABLE: 
+    - MARKDOWN
+    - YAML
+    - JAVASCRIPT
+    - JSON
+    - HTML
+    - CSS
+    - ACTIONLINT
+    - SHELL
+    - EDITORCONFIG
+    - GITLEAKS
+    - SPELL
+    - DOCFAIL
+  
+  # Apply cupcake flavor settings
+  # Cupcake is a lighter flavor focusing on common file types
+  
+  # Markdown settings
+  MARKDOWN:
+    MARKDOWNLINT_RULES_DEFAULT: all
+    MARKDOWNLINT_RULES_CONFIGURATION: |
+      MD013: false  # Line length
+      MD041: false  # First line heading
+  
+  # Prettier for JS/TS/JSON/CSS
+  JAVASCRIPT:
+    PRETTIER_ARGUMENTS: --log-level warn
+  JSON:
+    PRETTIER_ARGUMENTS: --log-level warn
+  CSS:
+    PRETTIER_ARGUMENTS: --log-level warn
+  
+  # YAML formatting
+  YAML:
+    PRETTIER_ARGUMENTS: --log-level warn
+  
+  # HTML formatting
+  HTML:
+    PRETTIER_ARGUMENTS: --log-level warn
