@@ -32,15 +32,17 @@ P.clear = function () {
 };
 
 P.apply = function (o) {
-  document.body.removeAttribute("data-md-color-primary");
-  document.body.removeAttribute("data-md-color-accent");
   if (o.primary) document.body.setAttribute("data-md-color-primary", o.primary);
+  else document.body.removeAttribute("data-md-color-primary");
   if (o.accent) document.body.setAttribute("data-md-color-accent", o.accent);
+  else document.body.removeAttribute("data-md-color-accent");
+  if (o.scheme) document.body.setAttribute("data-md-color-scheme", o.scheme);
+  else document.body.removeAttribute("data-md-color-scheme");
 };
 
 P.restore = function () {
   var prefs = P.load();
-  if (!prefs.primary && !prefs.accent) return;
+  if (!prefs.primary && !prefs.accent && !prefs.scheme) return;
   P.apply(prefs);
 };
 
@@ -67,6 +69,11 @@ P.openModal = function () {
   var prefs = P.load();
   var curP = prefs.primary || document.body.getAttribute("data-md-color-primary") || "";
   var curA = prefs.accent || document.body.getAttribute("data-md-color-accent") || "";
+  var curScheme = prefs.scheme || document.body.getAttribute("data-md-color-scheme") || "slate";
+
+  if (!prefs.primary) prefs.primary = curP;
+  if (!prefs.accent) prefs.accent = curA;
+  if (!prefs.scheme) prefs.scheme = curScheme;
 
   var overlay = document.createElement("div");
   overlay.className = "md-picker-overlay";
@@ -79,6 +86,39 @@ P.openModal = function () {
   title.textContent = "Style Picker";
   title.style.marginTop = "0";
   modal.appendChild(title);
+
+  var sH = document.createElement("h3");
+  sH.textContent = "Scheme";
+  modal.appendChild(sH);
+
+  var schemeDiv = document.createElement("div");
+  schemeDiv.className = "md-picker-scheme";
+
+  var darkBtn = document.createElement("button");
+  darkBtn.textContent = "Dark";
+  if (curScheme === "slate") darkBtn.className = "active";
+  darkBtn.addEventListener("click", function () {
+    prefs.scheme = "slate";
+    P.save(prefs);
+    P.apply(prefs);
+    darkBtn.className = "active";
+    lightBtn.className = "";
+  });
+  schemeDiv.appendChild(darkBtn);
+
+  var lightBtn = document.createElement("button");
+  lightBtn.textContent = "Light";
+  if (curScheme === "default") lightBtn.className = "active";
+  lightBtn.addEventListener("click", function () {
+    prefs.scheme = "default";
+    P.save(prefs);
+    P.apply(prefs);
+    lightBtn.className = "active";
+    darkBtn.className = "";
+  });
+  schemeDiv.appendChild(lightBtn);
+
+  modal.appendChild(schemeDiv);
 
   var pH = document.createElement("h3");
   pH.textContent = "Primary";
@@ -109,9 +149,11 @@ P.openModal = function () {
   resetBtn.addEventListener("click", function () {
     P.clear();
     prefs = {};
-    curP = ""; curA = "";
+    curP = ""; curA = ""; curScheme = "slate";
     pGrid.querySelectorAll(".md-swatch").forEach(function (s) { s.classList.remove("active"); });
     aGrid.querySelectorAll(".md-swatch").forEach(function (s) { s.classList.remove("active"); });
+    darkBtn.className = "active";
+    lightBtn.className = "";
     P.apply({});
     location.reload();
   });
@@ -141,9 +183,9 @@ P.addButton = function () {
   wrapper.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.16-.59-1.59-.36-.42-.59-1.16-.59-1.91 0-1.38 1.12-2.5 2.5-2.5H18c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3.5 4c-.83 0-1.5-.67-1.5-1.5S17.17 8 18 8s1.5.67 1.5 1.5S18.83 11 18 11z"/></svg>';
   wrapper.addEventListener("click", P.openModal);
 
-  var toggle = header.querySelector('[title*="Switch to"]');
-  if (toggle && toggle.parentNode === header) {
-    header.insertBefore(wrapper, toggle);
+  var paletteForm = header.querySelector('.md-header__option[data-md-component="palette"]');
+  if (paletteForm) {
+    header.insertBefore(wrapper, paletteForm);
   } else {
     header.appendChild(wrapper);
   }

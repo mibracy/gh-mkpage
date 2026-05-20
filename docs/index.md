@@ -17,4 +17,4 @@ Welcome to **gh-mkpage** — a project for generating and deploying markdown doc
 
 ---
 
-*Braun dark mode default. Toggle theme via header icon. Reset to defaults via ↻ button.*
+*Braun dark mode default. Customise via the style picker icon in the header.*

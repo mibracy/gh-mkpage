@@ -87,6 +87,36 @@
 #style-picker-btn:hover {
   opacity: 0.7;
 }
+
+.md-header__option[data-md-component="palette"] {
+  display: none;
+}
+
+.md-picker-scheme {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.md-picker-scheme button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid var(--md-default-fg-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.md-picker-scheme button.active {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border-color: var(--md-primary-fg-color);
+}
+
+.md-content {
   animation: pageEnter 0.25s ease-out;
 }
 
