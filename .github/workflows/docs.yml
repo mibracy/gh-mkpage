@@ -85,7 +85,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          PREVIEW_URL="https://mibracy.github.io/gh-mkpage/preview/${{ github.event.number }}/"
+          PREVIEW_URL="https://mibracy.github.io/gh-mkpage/preview/pr-${{ github.event.number }}/"
           BODY="### 🔍 Preview deployed\n\n[$PREVIEW_URL]($PREVIEW_URL)"
           COMMENT_ID=$(gh api /repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
             --jq '.[] | select(.body | startswith("### 🔍 Preview deployed")) | .id' | head -1)
@@ -105,7 +105,7 @@ jobs:
           path: gh-pages-verify
       - name: List preview files
         run: |
-          DIR="preview/${{ github.event.number }}"
+          DIR="preview/pr-${{ github.event.number }}"
           if [ -d "gh-pages-verify/$DIR" ]; then
             echo "✅ Preview directory exists: $DIR"
             echo "Files:" && ls -la "gh-pages-verify/$DIR"
