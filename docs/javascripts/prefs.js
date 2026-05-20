@@ -40,6 +40,9 @@ P.apply = function (o) {
 P.restore = function () {
   var prefs = P.load();
   if (!prefs.primary && !prefs.accent && !prefs.scheme) return;
+  if (document.body.getAttribute("data-md-color-primary") === prefs.primary &&
+      document.body.getAttribute("data-md-color-accent") === prefs.accent &&
+      document.body.getAttribute("data-md-color-scheme") === prefs.scheme) return;
   P.apply(prefs);
 };
 
@@ -193,6 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
   P.addButton();
 });
 document.addEventListener("DOMContentSwitch", function () {
-  P.restore();
-  P.addButton();
+  requestAnimationFrame(function () {
+    P.restore();
+    P.addButton();
+  });
 });
