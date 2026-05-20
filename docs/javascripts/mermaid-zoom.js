@@ -6,7 +6,6 @@ function enableZoom(svg) {
   var c = svg.parentElement;
   c.style.overflow = "hidden";
   c.style.cursor = "grab";
-
   svg.style.transformOrigin = "0 0";
 
   var ox, oy, drag = false;
@@ -25,7 +24,7 @@ function enableZoom(svg) {
     ty = my - (my - ty) * (ns / scale);
     scale = ns;
     apply();
-  });
+  }, { passive: false });
 
   c.addEventListener("mousedown", function (e) {
     e.preventDefault();
@@ -54,7 +53,24 @@ function scan() {
   document.querySelectorAll(".mermaid svg").forEach(enableZoom);
 }
 
-var obs = new MutationObserver(scan);
-obs.observe(document.body || document.documentElement, { childList: true, subtree: true });
-document.addEventListener("DOMContentLoaded", scan);
-document.addEventListener("readystatechange", scan);
+function deferScan() {
+  setTimeout(scan, 300);
+  setTimeout(scan, 800);
+}
+
+var ready = function () {
+  var target = document.body || document.documentElement;
+  if (target) {
+    var obs = new MutationObserver(deferScan);
+    obs.observe(target, { childList: true, subtree: true });
+  }
+  scan();
+  deferScan();
+  document.addEventListener("DOMContentSwitch", deferScan);
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", ready);
+} else {
+  ready();
+}
