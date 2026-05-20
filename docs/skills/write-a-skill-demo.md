@@ -8,3 +8,7 @@ Create new agent skills with proper structure and progressive disclosure.
 3. Install and test
 
 Follows the skills.sh conventions for packaging agent skills.
+
+## ROI to human
+
+Package repeat workflows as reusable skills. Stop teaching agents the same thing twice.

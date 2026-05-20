@@ -5,3 +5,7 @@ Turn current conversation context into a published PRD. Does NOT interview the u
 **Prerequisite:** run `/setup-matt-pocock-skills` first.
 
 Output: structured PRD posted to the issue tracker with `ready-for-agent` label.
+
+## ROI to human
+
+Conversation → spec in one shot. No template fiddling, no formatting busywork.

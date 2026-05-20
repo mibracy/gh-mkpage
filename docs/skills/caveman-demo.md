@@ -10,3 +10,7 @@ Example: *Why component re-render?*
 - lite: "Your component re-renders because you create a new object reference each render."
 - full: "New object ref each render. Wrap in `useMemo`."
 - ultra: "Inline obj prop → new ref → re-render. `useMemo`."
+
+## ROI to human
+
+Less tokens = faster sessions + lower cost. More signal, less fluff per turn.

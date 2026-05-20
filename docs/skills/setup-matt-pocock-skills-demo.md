@@ -8,3 +8,7 @@ One-time setup skill. Must run before using to-issues, to-prd, triage, diagnose,
 - Domain doc layout (where CONTEXT.md and ADRs live)
 
 **Usage:** load the skill, let the agent explore, answer its questions.
+
+## ROI to human
+
+Run once, unlocks 7 downstream skills. Essential wiring for the whole skill suite.

@@ -9,3 +9,7 @@ Surface architectural friction and propose **deepening opportunities** — refac
 - **Adapter** — concrete thing satisfying an interface at a seam
 
 Informed by domain language in CONTEXT.md and decisions in docs/adr/.
+
+## ROI to human
+
+Smaller interfaces, less coupling, easier testing. Pays off every future change.

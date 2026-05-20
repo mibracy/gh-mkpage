@@ -7,3 +7,7 @@ Red-green-refactor loop:
 3. **Refactor** — clean up while keeping tests green
 
 Run focused tests: `pnpm vitest run -- [test-pattern]`
+
+## ROI to human
+
+Red‑green‑refactor: always know what works. Fewer regressions, safer refactors.

@@ -8,3 +8,7 @@ Build throwaway code to answer a question. Two branches:
 **Usage:** "prototype this data model", "try a few designs for this page"
 
 Tip: pick the branch based on the question being answered, not the format preference.
+
+## ROI to human
+
+Answers design questions before committing to code. Fail fast on paper, not in prod.

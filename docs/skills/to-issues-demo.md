@@ -5,3 +5,7 @@ Break a plan, spec, or PRD into independently-grabbable issues using vertical sl
 **Prerequisite:** run `/setup-matt-pocock-skills` first.
 
 Process: gather context → explore codebase → break into vertical-slice issues → publish to tracker with labels.
+
+## ROI to human
+
+Big plans become grab‑and‑go tickets. Clear scope, clear ownership, less overhead.

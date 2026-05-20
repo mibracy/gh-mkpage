@@ -133,3 +133,7 @@ gantt
   Theme customization:active, 1d
   README             :done, 2026-05-19, 1d
 ```
+
+## ROI to human
+
+Diagrams that live in version control, stay current with code, and render anywhere.
