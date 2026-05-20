@@ -33,16 +33,16 @@ P.clear = function () {
 
 P.apply = function (o) {
   if (o.primary) document.body.setAttribute("data-md-color-primary", o.primary);
-  else document.body.removeAttribute("data-md-color-primary");
   if (o.accent) document.body.setAttribute("data-md-color-accent", o.accent);
-  else document.body.removeAttribute("data-md-color-accent");
   if (o.scheme) document.body.setAttribute("data-md-color-scheme", o.scheme);
-  else document.body.removeAttribute("data-md-color-scheme");
 };
 
 P.restore = function () {
   var prefs = P.load();
   if (!prefs.primary && !prefs.accent && !prefs.scheme) return;
+  if (document.body.getAttribute("data-md-color-primary") === prefs.primary &&
+      document.body.getAttribute("data-md-color-accent") === prefs.accent &&
+      document.body.getAttribute("data-md-color-scheme") === prefs.scheme) return;
   P.apply(prefs);
 };
 
@@ -196,11 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
   P.addButton();
 });
 document.addEventListener("DOMContentSwitch", function () {
-  P.restore();
-  P.addButton();
-  var el = document.querySelector(".md-content");
-  if (el) {
-    el.style.animation = "none";
-    requestAnimationFrame(function () { el.style.animation = ""; });
-  }
+  requestAnimationFrame(function () {
+    P.restore();
+    P.addButton();
+  });
 });
