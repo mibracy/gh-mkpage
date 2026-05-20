@@ -9,7 +9,50 @@ theme:
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
+    - navigation.indexes
     - search.highlight
+  palette:
+    - scheme: slate
+      primary: brown
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: brown
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/prefs.js
+
+nav:
+  - Home: index.md
+  - Skills:
+    - Caveman: skills/caveman-demo.md
+    - Create-Readme: skills/create-readme-demo.md
+    - Diagnose: skills/diagnose-demo.md
+    - Grill-Me: skills/grill-me-demo.md
+    - Grill-With-Docs: skills/grill-with-docs-demo.md
+    - Handoff: skills/handoff-demo.md
+    - Improve Architecture: skills/improve-codebase-architecture-demo.md
+    - Prototype: skills/prototype-demo.md
+    - Setup: skills/setup-matt-pocock-skills-demo.md
+    - TDD: skills/tdd-demo.md
+    - To-Issues: skills/to-issues-demo.md
+    - To-PRD: skills/to-prd-demo.md
+    - Triage: skills/triage-demo.md
+    - Write-A-Skill: skills/write-a-skill-demo.md
+    - Zoom-Out: skills/zoom-out-demo.md
+  - Updates:
+    - "Update 1 — Init": updates/001-repo-init.md
+    - "Update 2 — Docs + CI": updates/002-docs-ci.md
+    - "Update 3 — README": updates/003-readme.md
 
 markdown_extensions:
   - pymdownx.superfences:
