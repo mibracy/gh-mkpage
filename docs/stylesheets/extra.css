@@ -79,7 +79,14 @@
   opacity: 0.6;
 }
 
-.md-content {
+#style-picker-btn {
+  padding: 0 0.4rem;
+  color: var(--md-primary-bg-color);
+}
+
+#style-picker-btn:hover {
+  opacity: 0.7;
+}
   animation: pageEnter 0.25s ease-out;
 }
 

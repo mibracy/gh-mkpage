@@ -129,19 +129,24 @@ P.openModal = function () {
 };
 
 P.addButton = function () {
-  var existing = document.querySelector('.md-header__button[title="Style picker"]');
-  if (existing) return;
+  if (document.getElementById("style-picker-btn")) return;
 
-  var toggle = document.querySelector('.md-header__button[title*="Switch to"]');
-  if (!toggle) return;
+  var header = document.querySelector(".md-header__inner");
+  if (!header) return;
 
-  var btn = document.createElement("a");
-  btn.className = "md-header__button md-icon";
-  btn.title = "Style picker";
-  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-2c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1zm-6 0c0-.55-.45-1-1-1s-1 .45-1 1 .45 1 1 1 1-.45 1-1zm7.07 5.07l-1.41 1.41c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0z"/></svg>';
-  btn.style.cursor = "pointer";
-  btn.addEventListener("click", P.openModal);
-  toggle.parentNode.insertBefore(btn, toggle);
+  var wrapper = document.createElement("div");
+  wrapper.id = "style-picker-btn";
+  wrapper.style.cssText = "display:inline-flex;align-items:center;cursor:pointer";
+  wrapper.title = "Style picker";
+  wrapper.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.16-.59-1.59-.36-.42-.59-1.16-.59-1.91 0-1.38 1.12-2.5 2.5-2.5H18c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3.5 4c-.83 0-1.5-.67-1.5-1.5S17.17 8 18 8s1.5.67 1.5 1.5S18.83 11 18 11z"/></svg>';
+  wrapper.addEventListener("click", P.openModal);
+
+  var toggle = header.querySelector('[title*="Switch to"]');
+  if (toggle && toggle.parentNode === header) {
+    header.insertBefore(wrapper, toggle);
+  } else {
+    header.appendChild(wrapper);
+  }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
