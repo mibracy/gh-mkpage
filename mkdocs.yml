@@ -39,6 +39,11 @@ nav:
     - Local development: contributing/local-development.md
     - Adding skills: contributing/adding-skills.md
     - CI/CD pipeline: contributing/ci-cd.md
+  - Architecture:
+    - architecture/index.md
+    - Site config: architecture/site-config.md
+    - Custom JS: architecture/custom-js.md
+    - Git hooks: architecture/githooks.md
   - Skills:
     - skills/index.md
     - Caveman: skills/caveman-demo.md
