@@ -39,7 +39,9 @@ P.apply = function (o) {
 };
 
 P.restore = function () {
-  P.apply(P.load());
+  var prefs = P.load();
+  if (!prefs.primary && !prefs.accent) return;
+  P.apply(prefs);
 };
 
 P.renderSwatches = function (colors, current, onPick) {
@@ -63,8 +65,8 @@ P.renderSwatches = function (colors, current, onPick) {
 P.openModal = function () {
   if (document.querySelector(".md-picker-overlay")) return;
   var prefs = P.load();
-  var curP = prefs.primary || "";
-  var curA = prefs.accent || "";
+  var curP = prefs.primary || document.body.getAttribute("data-md-color-primary") || "";
+  var curA = prefs.accent || document.body.getAttribute("data-md-color-accent") || "";
 
   var overlay = document.createElement("div");
   overlay.className = "md-picker-overlay";
