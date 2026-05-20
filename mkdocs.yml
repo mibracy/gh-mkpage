@@ -34,6 +34,11 @@ extra_javascript:
 
 nav:
   - Home: index.md
+  - Contributing:
+    - contributing/index.md
+    - Local development: contributing/local-development.md
+    - Adding skills: contributing/adding-skills.md
+    - CI/CD pipeline: contributing/ci-cd.md
   - Skills:
     - skills/index.md
     - Caveman: skills/caveman-demo.md
