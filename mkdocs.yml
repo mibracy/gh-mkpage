@@ -34,6 +34,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - Skills:
+    - skills/index.md
     - Caveman: skills/caveman-demo.md
     - Create-Readme: skills/create-readme-demo.md
     - Diagnose: skills/diagnose-demo.md
