@@ -11,6 +11,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  deployments: write
 
 jobs:
   build:
@@ -47,6 +49,19 @@ jobs:
           publish_dir: site
           publish_branch: gh-pages
 
+      - name: Verify root deployment
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages-verify
+      - name: Check site index
+        run: |
+          if [ -f "gh-pages-verify/index.html" ]; then
+            echo "✅ Root deployment verified (index.html found)"
+          else
+            echo "❌ Root index.html missing"
+          fi
+
   deploy-preview:
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
     needs: build
@@ -65,6 +80,38 @@ jobs:
           publish_branch: gh-pages
           destination_dir: preview/pr-${{ github.event.number }}
           keep_files: true
+
+      - name: Post preview URL
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PREVIEW_URL="https://mibracy.github.io/gh-mkpage/preview/${{ github.event.number }}/"
+          BODY="### 🔍 Preview deployed\n\n[$PREVIEW_URL]($PREVIEW_URL)"
+          COMMENT_ID=$(gh api /repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+            --jq '.[] | select(.body | startswith("### 🔍 Preview deployed")) | .id' | head -1)
+          if [ -n "$COMMENT_ID" ]; then
+            gh api /repos/${{ github.repository }}/issues/comments/$COMMENT_ID \
+              -X PATCH -f body="$BODY" > /dev/null
+          else
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --repo ${{ github.repository }} \
+              --body "$BODY"
+          fi
+
+      - name: Verify preview folder on gh-pages
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages-verify
+      - name: List preview files
+        run: |
+          DIR="preview/${{ github.event.number }}"
+          if [ -d "gh-pages-verify/$DIR" ]; then
+            echo "✅ Preview directory exists: $DIR"
+            echo "Files:" && ls -la "gh-pages-verify/$DIR"
+          else
+            echo "❌ Preview directory NOT FOUND: $DIR"
+          fi
 
   cleanup-preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
