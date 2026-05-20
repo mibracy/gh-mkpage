@@ -15,10 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-       - name: Run MegaLinter with cupcake flavor
-         uses: oxsecurity/megalinter@v5
-         with:
-           flavor: cupcake
-           report-mode: only-report
-           comment-on-failure: true
-           repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run MegaLinter with cupcake flavor
+        uses: oxsecurity/megalinter@v5
+        with:
+          flavor: cupcake
+          report-mode: only-report
+          comment-on-failure: true
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
