@@ -25,4 +25,5 @@ Treat it as a greenfield project. There are no existing conventions, configs, to
 - **to-prd** — turn conversation context into a published PRD.
 - **triage** — triage issues through a state machine with roles.
 - **write-a-skill** — create new agent skills with proper structure.
+- **mkdocs-material** — expert guidance for building docs with Material for MkDocs (config, content patterns, theme, deployment).
 - **zoom-out** — get broader context about unfamiliar code sections.
