@@ -1,0 +1,59 @@
+name: PR template
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  template:
+    if: github.event.pull_request.body == '' || github.event.pull_request.body == null
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          BODY='## Goal
+
+          What does this PR achieve?
+
+          ---
+
+          ## Context
+
+          Why is this needed? What domain concepts, existing decisions (ADRs), or prior art does this touch?
+
+          ---
+
+          ## Design decisions
+
+          What approaches were considered? Which one was chosen and why?
+
+          ---
+
+          ## Changes
+
+          | File | What changed |
+          |------|-------------|
+          | | |
+
+          ---
+
+          ## Testing
+
+          - [ ] Built locally (`docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build`)
+          - [ ] Previewed at `http://localhost:8000`
+          - [ ] Verified instant navigation, Mermaid diagrams, style picker
+
+          ---
+
+          ## Handoff notes
+
+          Anything a follow-up agent should know? Link related issues, prior PRs, or skills used.
+
+          > Inspired by grill-me, grill-with-docs, and handoff.'
+          gh api "/repos/$REPO/issues/$PR" -X PATCH -f body="$BODY"
