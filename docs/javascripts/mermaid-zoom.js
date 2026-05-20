@@ -1,54 +1,60 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var svgs = document.querySelectorAll(".mermaid svg");
-  svgs.forEach(function (svg) {
-    var scale = 1, tx = 0, ty = 0;
-    var container = svg.parentElement;
-    container.style.overflow = "hidden";
-    container.style.cursor = "grab";
-    container.style.position = "relative";
+function enableZoom(svg) {
+  if (svg.dataset.zoomEnabled) return;
+  svg.dataset.zoomEnabled = "1";
 
-    svg.setAttribute("transform-origin", "0 0");
-    svg.setAttribute("style", "transition: transform 0.05s");
+  var scale = 1, tx = 0, ty = 0;
+  var c = svg.parentElement;
+  c.style.overflow = "hidden";
+  c.style.cursor = "grab";
 
-    var box = svg.viewBox || { baseVal: { x: 0, y: 0, width: 0, height: 0 } };
-    var ox = 0, oy = 0, dragging = false;
+  svg.style.transformOrigin = "0 0";
 
-    function apply() {
-      svg.style.transform = "translate(" + tx + "px, " + ty + "px) scale(" + scale + ")";
-    }
+  var ox, oy, drag = false;
 
-    container.addEventListener("wheel", function (e) {
-      e.preventDefault();
-      var rect = container.getBoundingClientRect();
-      var mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      var ds = e.deltaY > 0 ? 0.9 : 1.1;
-      var ns = Math.min(5, Math.max(0.2, scale * ds));
-      tx = mx - (mx - tx) * (ns / scale);
-      ty = my - (my - ty) * (ns / scale);
-      scale = ns;
-      apply();
-    });
+  function apply() {
+    svg.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+  }
 
-    container.addEventListener("mousedown", function (e) {
-      e.preventDefault();
-      dragging = true;
-      ox = e.clientX - tx;
-      oy = e.clientY - ty;
-      container.style.cursor = "grabbing";
-    });
-
-    document.addEventListener("mousemove", function (e) {
-      if (!dragging) return;
-      tx = e.clientX - ox;
-      ty = e.clientY - oy;
-      apply();
-    });
-
-    document.addEventListener("mouseup", function () {
-      if (dragging) {
-        dragging = false;
-        container.style.cursor = "grab";
-      }
-    });
+  c.addEventListener("wheel", function (e) {
+    e.preventDefault();
+    var r = c.getBoundingClientRect();
+    var mx = e.clientX - r.left, my = e.clientY - r.top;
+    var ds = e.deltaY > 0 ? 0.9 : 1.1;
+    var ns = Math.min(5, Math.max(0.2, scale * ds));
+    tx = mx - (mx - tx) * (ns / scale);
+    ty = my - (my - ty) * (ns / scale);
+    scale = ns;
+    apply();
   });
-});
+
+  c.addEventListener("mousedown", function (e) {
+    e.preventDefault();
+    drag = true;
+    ox = e.clientX - tx;
+    oy = e.clientY - ty;
+    c.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", function (e) {
+    if (!drag) return;
+    tx = e.clientX - ox;
+    ty = e.clientY - oy;
+    apply();
+  });
+
+  document.addEventListener("mouseup", function () {
+    if (drag) {
+      drag = false;
+      c.style.cursor = "grab";
+    }
+  });
+}
+
+function scan() {
+  document.querySelectorAll(".mermaid svg").forEach(enableZoom);
+}
+
+var obs = new MutationObserver(scan);
+obs.observe(document.body || document.documentElement, { childList: true, subtree: true });
+document.addEventListener("DOMContentLoaded", scan);
+document.addEventListener("readystatechange", scan);
