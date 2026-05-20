@@ -116,11 +116,6 @@
   border-color: var(--md-primary-fg-color);
 }
 
-.md-content {
-  animation: pageEnter 0.25s ease-out;
-}
-
-@keyframes pageEnter {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #faf0dc;
 }
