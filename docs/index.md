@@ -13,6 +13,7 @@ Welcome to **gh-mkpage** — a project for generating and deploying markdown doc
 
 - [**Skills**](skills/index.md) — 16 agent skills with demo guides
 - [**Updates**](updates/index.md) — project progress logs with semver
+- [**Projects**](projects/index.md) — all mibracy GitHub repos
 
 ---
 

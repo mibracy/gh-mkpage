@@ -53,6 +53,7 @@ nav:
     - Write-A-Skill: skills/write-a-skill-demo.md
     - Zoom-Out: skills/zoom-out-demo.md
   - Updates: updates/index.md
+  - Projects: projects/index.md
 
 markdown_extensions:
   - pymdownx.superfences:
