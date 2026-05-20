@@ -11,6 +11,7 @@ Treat it as a greenfield project. There are no existing conventions, configs, to
 ## Installed skills
 
 - **caveman** (`juliusbrussee/caveman@caveman`) — ultra-compressed communication mode. Cuts token usage ~75%. Intensity levels: lite, full (default), ultra, wenyan variants. Installed at `.agents/skills/caveman`.
+- **create-readme** (`github/awesome-copilot@create-readme`) — generates a README.md from project review.
 - **diagnose** — disciplined debug loop for hard bugs and performance regressions.
 - **grill-me** — interview the user relentlessly to stress-test a plan or design.
 - **grill-with-docs** — grill plan against existing domain model and docs, updates CONTEXT.md/ADRs inline.

@@ -7,6 +7,12 @@
       "skillPath": "skills/productivity/caveman/SKILL.md",
       "computedHash": "934433479903febc585bf6deb5f0cebc63137e3f86b7babe0aab1ecb94d6d7a4"
     },
+    "create-readme": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-readme/SKILL.md",
+      "computedHash": "d0ece1b2164ce1376e4ab6e98d6ac079df3a2a94f5f02224362b6a1ce2516ae9"
+    },
     "diagnose": {
       "source": "mattpocock/skills",
       "sourceType": "github",

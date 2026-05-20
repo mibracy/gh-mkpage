@@ -15,9 +15,11 @@
 - [To-PRD Demo](skills/to-prd-demo.md)
 - [Triage Demo](skills/triage-demo.md)
 - [Write-A-Skill Demo](skills/write-a-skill-demo.md)
+- [Create-Readme Demo](skills/create-readme-demo.md)
 - [Zoom-Out Demo](skills/zoom-out-demo.md)
 
 ## Project Updates
 
 - [Update 1 — Repo init + skill setup](updates/001-repo-init.md)
 - [Update 2 — Docs site + CI/CD pipeline](updates/002-docs-ci.md)
+- [Update 3 — README + create-readme skill](updates/003-readme.md)
